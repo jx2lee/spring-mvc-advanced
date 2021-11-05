@@ -33,6 +33,7 @@ public class BasicController {
 
     @GetMapping("/variable")
     public String variable(Model model) {
+
         User userA = new User("userA", 10);
         User userB = new User("userB", 15);
 
@@ -65,6 +66,7 @@ public class BasicController {
 
     @GetMapping("/basic-objects")
     public String basicObjects(HttpSession session) {
+
         session.setAttribute("sessionData", "Hello Session");
         return "basic/basic-objects";
     }
@@ -78,7 +80,16 @@ public class BasicController {
 
     @GetMapping("/date")
     public String date(Model model) {
+
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "basic/date";
+    }
+
+    @GetMapping("/link")
+    public String link(Model model) {
+
+        model.addAttribute("param1", "data1");
+        model.addAttribute("param2", "data2");
+        return "basic/link";
     }
 }
