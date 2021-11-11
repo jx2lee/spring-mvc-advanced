@@ -128,4 +128,10 @@ public class BasicController {
         model.addAttribute("users", list);
     }
 
+    @GetMapping("condition")
+    public String condition(Model model) {
+        addUser(model);
+        return "/basic/condition";
+    }
+
 }
