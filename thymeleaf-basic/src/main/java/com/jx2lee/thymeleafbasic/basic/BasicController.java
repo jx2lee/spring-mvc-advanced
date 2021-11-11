@@ -99,4 +99,12 @@ public class BasicController {
         model.addAttribute("data", "Spring!");
         return "/basic/literal";
     }
+
+    @GetMapping("/operation")
+    public String operation(Model model) {
+
+        model.addAttribute("nullData", null);
+        model.addAttribute("data", "Hello, jx2lee!");
+        return "/basic/operation";
+    }
 }
