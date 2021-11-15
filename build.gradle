@@ -1,20 +1,59 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '2.5.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 group 'com.jx2lee'
 version '1.0-SNAPSHOT'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+//    compileOnly project(':thymeleaft-basic')
 }
 
 test {
     useJUnitPlatform()
+}
+
+subprojects {
+    group 'com.jx2lee'
+    version '1.0-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    }
+}
+
+//project(':thymeleaf-basic') {
+//    dependencies {
+//        implementation project(':thymeleaf-basic')
+//    }
+//}
+
+bootJar {
+    enabled(false)
 }
