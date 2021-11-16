@@ -2,6 +2,8 @@ package com.jx2lee.thymeleafwithspring.domain.item;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Item {
 
@@ -9,6 +11,11 @@ public class Item {
     private String itemName;
     private Integer price;
     private Integer quantity;
+
+    private Boolean open; // 판매 여부
+    private List<String> regions; // 등록 지역
+    private ItemType itemType;
+    private String deliveryCode;
 
     public Item() {
     }
