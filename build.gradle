@@ -24,8 +24,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-//    compileOnly project(':thymeleaft-basic')
 }
 
 test {
@@ -47,12 +45,6 @@ subprojects {
         testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     }
 }
-
-//project(':thymeleaf-basic') {
-//    dependencies {
-//        implementation project(':thymeleaf-basic')
-//    }
-//}
 
 bootJar {
     enabled(false)

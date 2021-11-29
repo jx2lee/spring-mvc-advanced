@@ -1,7 +1,7 @@
-package com.jx2lee.thymeleafwithspring;
+package com.jx2lee.completed;
 
-import com.jx2lee.thymeleafwithspring.domain.item.Item;
-import com.jx2lee.thymeleafwithspring.domain.item.ItemRepository;
+import com.jx2lee.completed.domain.item.Item;
+import com.jx2lee.completed.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,2 +1,2 @@
 rootProject.name = 'spring-mvc-advanced'
-include ':thymeleaf-basic', ':mvc-advanced'
+include ':thymeleaf-basic', ':final'

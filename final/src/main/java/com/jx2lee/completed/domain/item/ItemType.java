@@ -1,4 +1,4 @@
-package com.jx2lee.thymeleafwithspring.domain.item;
+package com.jx2lee.completed.domain.item;
 
 public enum ItemType {
     BOOK("도서"), FOOD("음식"), ETC("기타");

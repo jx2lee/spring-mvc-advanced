@@ -1,13 +1,13 @@
-package com.jx2lee.thymeleafwithspring;
+package com.jx2lee.completed;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ThymeleafWithSpringApplication {
+public class FinalApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ThymeleafWithSpringApplication.class, args);
+        SpringApplication.run(FinalApplication.class, args);
     }
 
 }

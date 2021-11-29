@@ -1,10 +1,10 @@
-package com.jx2lee.thymeleafwithspring;
+package com.jx2lee.completed;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ThymeleafWithSpringApplicationTests {
+class completedApplicationTests {
 
     @Test
     void contextLoads() {

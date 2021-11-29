@@ -1,9 +1,7 @@
-package com.jx2lee.thymeleafwithspring.domain.item;
+package com.jx2lee.completed.domain.item;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * FAST: 빠른 배송

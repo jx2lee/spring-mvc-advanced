@@ -1,9 +1,9 @@
-package com.jx2lee.thymeleafwithspring.web.form;
+package com.jx2lee.completed.web.form;
 
-import com.jx2lee.thymeleafwithspring.domain.item.DeliveryCode;
-import com.jx2lee.thymeleafwithspring.domain.item.Item;
-import com.jx2lee.thymeleafwithspring.domain.item.ItemRepository;
-import com.jx2lee.thymeleafwithspring.domain.item.ItemType;
+import com.jx2lee.completed.domain.item.DeliveryCode;
+import com.jx2lee.completed.domain.item.Item;
+import com.jx2lee.completed.domain.item.ItemRepository;
+import com.jx2lee.completed.domain.item.ItemType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
