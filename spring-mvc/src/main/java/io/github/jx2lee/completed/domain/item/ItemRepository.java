@@ -1,4 +1,4 @@
-package com.jx2lee.completed.domain.item;
+package io.github.jx2lee.completed.domain.item;
 
 import org.springframework.stereotype.Repository;
 

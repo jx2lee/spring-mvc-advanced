@@ -1,7 +1,7 @@
-package com.jx2lee.completed;
+package io.github.jx2lee.completed;
 
-import com.jx2lee.completed.domain.item.Item;
-import com.jx2lee.completed.domain.item.ItemRepository;
+import io.github.jx2lee.completed.domain.item.Item;
+import io.github.jx2lee.completed.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

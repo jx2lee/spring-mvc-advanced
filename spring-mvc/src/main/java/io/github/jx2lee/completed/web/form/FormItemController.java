@@ -1,9 +1,9 @@
-package com.jx2lee.completed.web.form;
+package io.github.jx2lee.completed.web.form;
 
-import com.jx2lee.completed.domain.item.DeliveryCode;
-import com.jx2lee.completed.domain.item.Item;
-import com.jx2lee.completed.domain.item.ItemRepository;
-import com.jx2lee.completed.domain.item.ItemType;
+import io.github.jx2lee.completed.domain.item.DeliveryCode;
+import io.github.jx2lee.completed.domain.item.Item;
+import io.github.jx2lee.completed.domain.item.ItemRepository;
+import io.github.jx2lee.completed.domain.item.ItemType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
