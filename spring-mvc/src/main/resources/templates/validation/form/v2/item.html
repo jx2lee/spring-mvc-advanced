@@ -86,13 +86,13 @@
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
                     onclick="location.href='editForm.html'"
-                    th:onclick="|location.href='@{/validation/form/items/{itemId}/edit(itemId=${item.id})}'|"
+                    th:onclick="|location.href='@{/validation/form/v2/items/{itemId}/edit(itemId=${item.id})}'|"
                     type="button" th:text="#{page.updateItem}">상품 수정</button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='items.html'"
-                    th:onclick="|location.href='@{/validation/form/items}'|"
+                    th:onclick="|location.href='@{/validation/form/v2/items}'|"
                     type="button" th:text="#{page.items}">상품 목록</button>
         </div>
     </div>
