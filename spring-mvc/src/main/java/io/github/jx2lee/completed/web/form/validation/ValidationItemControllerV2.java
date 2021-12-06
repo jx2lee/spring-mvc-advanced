@@ -208,7 +208,6 @@ public class ValidationItemControllerV2 {
         return "redirect:/validation/form/v2/items/{itemId}";
     }
 
-
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
