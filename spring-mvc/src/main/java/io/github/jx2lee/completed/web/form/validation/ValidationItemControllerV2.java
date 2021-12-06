@@ -180,9 +180,6 @@ public class ValidationItemControllerV2 {
 
         // 특정Field error 처리
         ValidationUtils.rejectIfEmpty(bindingResult, "itemName", "required");
-        // if (!StringUtils.hasText(item.getItemName())) {
-        //     bindingResult.rejectValue("itemName", "required");
-        // }
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
             bindingResult.rejectValue("price", "range", new Object[]{1000, 1000000}, null);
         }
@@ -198,6 +195,7 @@ public class ValidationItemControllerV2 {
             }
         }
 
+        log.info("errors={}", bindingResult);
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             return "validation/form/v2/addForm";
