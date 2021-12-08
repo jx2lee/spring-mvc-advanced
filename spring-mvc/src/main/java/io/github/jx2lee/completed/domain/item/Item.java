@@ -2,6 +2,7 @@ package io.github.jx2lee.completed.domain.item;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -9,6 +10,12 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
+/**
+ * @ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 10000")
+ * 위와 같이 ScriptAssert 어노테이션을 이용해 Object Error, 즉 복합 에러를 처리할 수 있다.
+ * 단, 제약사항이 많아 그리 많이 사용하지는 않은 편. 강사님은 Field Error 의 경우 아래와 같은 annotation 을 작성하고
+   복합 필드 에러의 경우 java code 로 작성
+**/
 public class Item {
 
     private Long id;
