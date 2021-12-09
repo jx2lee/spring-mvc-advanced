@@ -1,6 +1,8 @@
-package io.github.jx2lee.completed.web.form.validation;
+package io.github.jx2lee.completed.web.validation;
 
 import io.github.jx2lee.completed.domain.item.*;
+import io.github.jx2lee.completed.web.form.ItemSaveForm;
+import io.github.jx2lee.completed.web.form.ItemUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -67,30 +69,33 @@ public class ValidationItemControllerV4 {
         return "validation/form/v4/addForm";
     }
 
-    // @PostMapping("/add")
-    public String addItemV1(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        //검증에 실패하면 다시 입력 폼으로 돌아간다.
-        if (bindingResult.hasErrors()) {
-            return "validation/form/v4/addForm";
-        }
-
-        Item savedItem = itemRepository.save(item);
-        redirectAttributes.addAttribute("itemId", savedItem.getId());
-        redirectAttributes.addAttribute("status", true);
-        return "redirect:/validation/form/v4/items/{itemId}";
-    }
-
     @PostMapping("/add")
-    public String addItemV2(@Validated(value = SaveCheck.class)
-                            @ModelAttribute Item item,
-                            BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes) {
+    public String addItem(@Validated
+                          @ModelAttribute("item") ItemSaveForm form,
+                          BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes) {
+
+        // 복합Field error 처리
+        if (form.getPrice() != null && form.getQuantity() != null) {
+            int resultPrice = form.getPrice() * form.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.addError(new ObjectError("form", "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
+            }
+        }
 
         //검증에 실패하면 다시 입력 폼으로 돌아간다.
         if (bindingResult.hasErrors()) {
             return "validation/form/v4/addForm";
         }
+
+        Item item = new Item();
+        item.setItemName(form.getItemName());
+        item.setPrice(form.getPrice());
+        item.setQuantity(form.getQuantity());
+        item.setOpen(form.getOpen());
+        item.setRegions(form.getRegions());
+        item.setItemType(form.getItemType());
+        item.setDeliveryCode(form.getDeliveryCode());
 
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
@@ -105,37 +110,17 @@ public class ValidationItemControllerV4 {
         return "validation/form/v4/editForm";
     }
 
-    // @PostMapping("/{itemId}/edit")
-    public String editV1(@PathVariable Long itemId, @Validated @ModelAttribute Item item, BindingResult bindingResult) {
-        // 복합Field error 처리
-        if (item.getPrice() != null && item.getQuantity() != null) {
-            int resultPrice = item.getPrice() * item.getQuantity();
-            if (resultPrice < 10000) {
-                bindingResult.addError(new ObjectError("item", "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
-            }
-        }
-
-        //검증에 실패하면 다시 입력 폼으로 돌아간다.
-        if (bindingResult.hasErrors()) {
-            log.info("errors={}",  bindingResult);
-            return "validation/form/v4/editForm";
-        }
-
-        itemRepository.update(itemId, item);
-        return "redirect:/validation/form/v4/items/{itemId}";
-    }
-
     @PostMapping("/{itemId}/edit")
-    public String editV2(@PathVariable Long itemId,
-                         @Validated(value = UpdateCheck.class)
-                         @ModelAttribute Item item,
-                         BindingResult bindingResult) {
+    public String edit(@PathVariable Long itemId,
+                       @Validated
+                       @ModelAttribute("item") ItemUpdateForm form,
+                       BindingResult bindingResult) {
 
         // 복합Field error 처리
-        if (item.getPrice() != null && item.getQuantity() != null) {
-            int resultPrice = item.getPrice() * item.getQuantity();
+        if (form.getPrice() != null && form.getQuantity() != null) {
+            int resultPrice = form.getPrice() * form.getQuantity();
             if (resultPrice < 10000) {
-                bindingResult.addError(new ObjectError("item", "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
+                bindingResult.addError(new ObjectError("form", "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
             }
         }
 
@@ -144,6 +129,15 @@ public class ValidationItemControllerV4 {
             log.info("errors={}",  bindingResult);
             return "validation/form/v4/editForm";
         }
+
+        Item item = new Item();
+        item.setItemName(form.getItemName());
+        item.setPrice(form.getPrice());
+        item.setQuantity(form.getQuantity());
+        item.setOpen(form.getOpen());
+        item.setRegions(form.getRegions());
+        item.setItemType(form.getItemType());
+        item.setDeliveryCode(form.getDeliveryCode());
 
         itemRepository.update(itemId, item);
         return "redirect:/validation/form/v4/items/{itemId}";

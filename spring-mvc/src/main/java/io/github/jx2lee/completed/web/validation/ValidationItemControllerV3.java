@@ -1,4 +1,4 @@
-package io.github.jx2lee.completed.web.form.validation;
+package io.github.jx2lee.completed.web.validation;
 
 import io.github.jx2lee.completed.domain.item.*;
 import lombok.RequiredArgsConstructor;
