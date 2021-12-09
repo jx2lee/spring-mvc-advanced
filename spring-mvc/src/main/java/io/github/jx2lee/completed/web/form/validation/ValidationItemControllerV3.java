@@ -1,9 +1,6 @@
 package io.github.jx2lee.completed.web.form.validation;
 
-import io.github.jx2lee.completed.domain.item.DeliveryCode;
-import io.github.jx2lee.completed.domain.item.Item;
-import io.github.jx2lee.completed.domain.item.ItemRepository;
-import io.github.jx2lee.completed.domain.item.ItemType;
+import io.github.jx2lee.completed.domain.item.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -70,8 +67,25 @@ public class ValidationItemControllerV3 {
         return "validation/form/v3/addForm";
     }
 
+    // @PostMapping("/add")
+    public String addItemV1(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        //검증에 실패하면 다시 입력 폼으로 돌아간다.
+        if (bindingResult.hasErrors()) {
+            return "validation/form/v3/addForm";
+        }
+
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/form/v3/items/{itemId}";
+    }
+
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addItemV2(@Validated(value = SaveCheck.class)
+                            @ModelAttribute Item item,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
 
         //검증에 실패하면 다시 입력 폼으로 돌아간다.
         if (bindingResult.hasErrors()) {
@@ -91,8 +105,8 @@ public class ValidationItemControllerV3 {
         return "validation/form/v3/editForm";
     }
 
-    @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute Item item, BindingResult bindingResult) {
+    // @PostMapping("/{itemId}/edit")
+    public String editV1(@PathVariable Long itemId, @Validated @ModelAttribute Item item, BindingResult bindingResult) {
         // 복합Field error 처리
         if (item.getPrice() != null && item.getQuantity() != null) {
             int resultPrice = item.getPrice() * item.getQuantity();
@@ -111,5 +125,28 @@ public class ValidationItemControllerV3 {
         return "redirect:/validation/form/v3/items/{itemId}";
     }
 
+    @PostMapping("/{itemId}/edit")
+    public String editV2(@PathVariable Long itemId,
+                         @Validated(value = UpdateCheck.class)
+                         @ModelAttribute Item item,
+                         BindingResult bindingResult) {
+
+        // 복합Field error 처리
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.addError(new ObjectError("item", "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
+            }
+        }
+
+        //검증에 실패하면 다시 입력 폼으로 돌아간다.
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}",  bindingResult);
+            return "validation/form/v3/editForm";
+        }
+
+        itemRepository.update(itemId, item);
+        return "redirect:/validation/form/v3/items/{itemId}";
+    }
 }
 
