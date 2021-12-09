@@ -1,4 +1,4 @@
-package io.github.jx2lee.completed.web;
+package io.github.jx2lee.completed.web.form;
 
 import io.github.jx2lee.completed.domain.item.DeliveryCode;
 import io.github.jx2lee.completed.domain.item.Item;
