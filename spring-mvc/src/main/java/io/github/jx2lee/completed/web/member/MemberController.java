@@ -33,6 +33,6 @@ public class MemberController {
         }
 
         memberRepository.save(member);
-        return "redirect:/login/home";
+        return "redirect:/login";
     }
 }
