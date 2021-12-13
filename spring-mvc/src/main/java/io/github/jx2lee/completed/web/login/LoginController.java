@@ -10,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +56,7 @@ public class LoginController {
         return "/login/loginHome";
     }
 
-    @GetMapping("/login")
+    // @GetMapping("/login")
     public String homeLoginV3(HttpServletRequest request, Model model) {
 
         // 세션이 없다면 로그인 홈 화면을 노출한다.
@@ -70,6 +67,20 @@ public class LoginController {
 
         // 로그인
         Member loginMember = (Member) session.getAttribute(LoginConst.LOGIN_MEMBER);
+        if (loginMember == null) {
+            return "/login/home";
+        }
+
+        model.addAttribute("member", loginMember);
+        return "/login/loginHome";
+    }
+
+    @GetMapping("/login")
+    public String homeLoginV3Spring(
+            @SessionAttribute(name = LoginConst.LOGIN_MEMBER, required = false) Member loginMember,
+            Model model) {
+
+        // 세션이 없다면 로그인 홈 화면을 노출한다.
         if (loginMember == null) {
             return "/login/home";
         }
