@@ -3,6 +3,7 @@ package io.github.jx2lee.completed.web.login;
 import io.github.jx2lee.completed.domain.login.LoginService;
 import io.github.jx2lee.completed.domain.member.Member;
 import io.github.jx2lee.completed.domain.member.MemberRepository;
+import io.github.jx2lee.completed.web.argumentresolver.Login;
 import io.github.jx2lee.completed.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -75,9 +76,23 @@ public class LoginController {
         return "/login/loginHome";
     }
 
-    @GetMapping("/login")
+    // @GetMapping("/login")
     public String homeLoginV3Spring(
             @SessionAttribute(name = LoginConst.LOGIN_MEMBER, required = false) Member loginMember,
+            Model model) {
+
+        // 세션이 없다면 로그인 홈 화면을 노출한다.
+        if (loginMember == null) {
+            return "/login/home";
+        }
+
+        model.addAttribute("member", loginMember);
+        return "/login/loginHome";
+    }
+
+    @GetMapping("/login")
+    public String homeLoginV3ArgumentResolver(
+            @Login Member loginMember,
             Model model) {
 
         // 세션이 없다면 로그인 홈 화면을 노출한다.
