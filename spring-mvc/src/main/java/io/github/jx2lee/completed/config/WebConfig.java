@@ -3,7 +3,7 @@ package io.github.jx2lee.completed.config;
 import io.github.jx2lee.completed.web.filter.LogFilter;
 import io.github.jx2lee.completed.web.filter.LoginCheckFilter;
 import io.github.jx2lee.completed.web.interceptor.LogInterceptor;
-import lombok.extern.java.Log;
+import io.github.jx2lee.completed.web.interceptor.LoginCheckInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +21,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/css/**", "/*.ico", "/error");
+
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/", "/login", "/login/loginForm", "/login/logout", "/members/add", "/css/**", "/*.ico");
     }
 
     // @Bean
