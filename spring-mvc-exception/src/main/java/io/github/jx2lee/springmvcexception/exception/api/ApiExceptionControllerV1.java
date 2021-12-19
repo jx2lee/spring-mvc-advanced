@@ -14,9 +14,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
-public class ApiExceptionController {
+public class ApiExceptionControllerV1 {
 
-    @GetMapping("/api/members/{id}")
+    @GetMapping("/api/v1/members/{id}")
     public MemberDto getMember(@PathVariable("id") String id) {
 
         if (id.equals("ex")) {
@@ -34,12 +34,12 @@ public class ApiExceptionController {
         return new MemberDto(id, "hello! " + id);
     }
 
-    @GetMapping("/api/response-status-ex1")
+    @GetMapping("/api/v1/response-status-ex1")
     public String responseStatusEx1() {
         throw new BadRequestException();
     }
 
-    @GetMapping("/api/response-status-ex2")
+    @GetMapping("/api/v1/response-status-ex2")
     public String responseStatusEx2() {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "error.bad");
     }
@@ -51,7 +51,7 @@ public class ApiExceptionController {
         private String name;
     }
 
-    @GetMapping("/api/default-handler-ex")
+    @GetMapping("/api/v1/default-handler-ex")
     public String defaultException(@RequestParam Integer data) {
         return "ok, " + data;
     }
