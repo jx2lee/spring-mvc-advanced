@@ -1,2 +1,2 @@
 rootProject.name = 'spring-mvc-advanced'
-include ':spring-mvc-common', ':spring-mvc-thymeleaf', ':spring-mvc-exception', ':spring-mvc-type-converter'
+include ':spring-mvc-common', ':spring-mvc-thymeleaf', ':spring-mvc-exception', ':spring-mvc-type-converter', ':spring-mvc-upload'
